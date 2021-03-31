@@ -1,7 +1,7 @@
 package com.mirfit.shop.services;
 
 import com.mirfit.shop.models.Card;
-import com.mirfit.shop.models.CheckRequest;
+import com.mirfit.shop.models.ReceiptRequest;
 import com.mirfit.shop.models.Product;
 import com.mirfit.shop.repositories.CardRepository;
 import com.mirfit.shop.repositories.ProductRepository;
@@ -24,12 +24,12 @@ public class ShopServiceImpl implements ShopService {
         this.cardRepository = cardRepository;
     }
 
-    public CheckRequest sendCheck() {
+    public ReceiptRequest sendCheck() {
         List<Product> products = generateProducts();
-        CheckRequest request = new CheckRequest();
+        ReceiptRequest request = new ReceiptRequest();
 
         if (products != null) {
-            request = new CheckRequest(
+            request = new ReceiptRequest(
                     generateTransactionId(),
                     countAmount(products),
                     products,
@@ -70,10 +70,8 @@ public class ShopServiceImpl implements ShopService {
 
         List<Product> randomProducts = new ArrayList<>();
 
-        int numOfProducts = random.nextInt(products.size()) + 1;
-
         for (int i = 0; i < random.nextInt(products.size()) + 1; i++) {
-            randomProducts.add(products.get(random.nextInt(numOfProducts)));
+            randomProducts.add(products.get(random.nextInt(products.size())));
         }
 
         return randomProducts;

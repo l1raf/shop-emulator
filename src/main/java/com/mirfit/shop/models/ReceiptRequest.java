@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
-public class CheckRequest {
+public class ReceiptRequest {
 
     private String transactionId;
 
@@ -23,13 +23,13 @@ public class CheckRequest {
     // The number of a terminal (1-15)
     private String cardAcceptorIdentificationCode;
 
-    public CheckRequest() {
+    public ReceiptRequest() {
     }
 
-    public CheckRequest(String transactionId, int amount,
-                        List<Product> goods, LocalDate dateTime,
-                        LocalTime localTime, Boolean isAccrual, String cardSequence,
-                        String cardAcceptorIdentificationCode) {
+    public ReceiptRequest(String transactionId, int amount,
+                          List<Product> goods, LocalDate dateTime,
+                          LocalTime localTime, Boolean isAccrual, String cardSequence,
+                          String cardAcceptorIdentificationCode) {
         this.transactionId = transactionId;
         this.amount = amount;
         this.goods = goods;

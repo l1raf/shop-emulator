@@ -1,6 +1,6 @@
 package com.mirfit.shop.controllers;
 
-import com.mirfit.shop.models.CheckRequest;
+import com.mirfit.shop.models.ReceiptRequest;
 import com.mirfit.shop.models.Product;
 import com.mirfit.shop.services.ShopService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class ShopController {
     }
 
     @GetMapping("check")
-    public ResponseEntity<CheckRequest> getCheck() {
+    public ResponseEntity<ReceiptRequest> getCheck() {
         return new ResponseEntity<>(shopService.sendCheck(), HttpStatus.OK);
     }
 

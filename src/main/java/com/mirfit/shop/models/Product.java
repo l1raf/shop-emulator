@@ -22,14 +22,21 @@ public class Product {
 
     private String currencyCode;
 
+    private String category;
+
     public Product() {
     }
 
-    public Product(int id, String name, int price, String currencyCode) {
+    public String getCategory() {
+        return category;
+    }
+
+    public Product(int id, String name, int price, String currencyCode, String category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.currencyCode = currencyCode;
+        this.category = category;
     }
 
     public int getId() {

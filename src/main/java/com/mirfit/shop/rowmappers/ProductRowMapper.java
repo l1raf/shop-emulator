@@ -14,6 +14,7 @@ public class ProductRowMapper implements RowMapper<Product> {
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
                 resultSet.getInt("price"),
-                resultSet.getString("currency_code"));
+                resultSet.getString("currency_code"),
+                resultSet.getString("category"));
     }
 }
