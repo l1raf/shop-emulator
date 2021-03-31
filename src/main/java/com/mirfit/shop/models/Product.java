@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.UUID;
 
 @JsonAutoDetect
 @Entity
@@ -19,13 +18,14 @@ public class Product {
 
     private String name;
 
-    private Double price;
+    private long price;
 
     private String currencyCode;
 
-    public Product() {}
+    public Product() {
+    }
 
-    public Product(int id, String name, Double price, String currencyCode) {
+    public Product(int id, String name, long price, String currencyCode) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -40,7 +40,7 @@ public class Product {
         return name;
     }
 
-    public Double getPrice() {
+    public long getPrice() {
         return price;
     }
 

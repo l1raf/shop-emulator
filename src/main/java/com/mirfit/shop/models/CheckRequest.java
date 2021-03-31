@@ -1,36 +1,41 @@
 package com.mirfit.shop.models;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
-import java.util.UUID;
 
 public class CheckRequest {
 
-    private UUID transactionId;
+    private String transactionId;
 
     private Double amount;
 
     private List<Product> goods;
 
-    private LocalDateTime dateTime;
+    private LocalDate localDate;
+
+    private LocalTime localTime;
 
     private Boolean isAccrual;
 
     private String cardSequence;
 
+    public CheckRequest() {
+    }
 
-    public CheckRequest(UUID transactionId, Double amount,
-                        List<Product> goods, LocalDateTime dateTime,
-                        Boolean isAccrual, String cardSequence) {
+    public CheckRequest(String transactionId, Double amount,
+                        List<Product> goods, LocalDate dateTime,
+                        LocalTime localTime, Boolean isAccrual, String cardSequence) {
         this.transactionId = transactionId;
         this.amount = amount;
         this.goods = goods;
-        this.dateTime = dateTime;
+        this.localDate = dateTime;
         this.isAccrual = isAccrual;
+        this.localTime = localTime;
         this.cardSequence = cardSequence;
     }
 
-    public UUID getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
@@ -42,8 +47,8 @@ public class CheckRequest {
         return goods;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public LocalDate getLocalDate() {
+        return localDate;
     }
 
     public Boolean getAccrual() {

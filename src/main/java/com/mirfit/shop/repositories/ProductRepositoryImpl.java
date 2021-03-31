@@ -1,4 +1,4 @@
-package com.mirfit.shop.repository;
+package com.mirfit.shop.repositories;
 
 import com.mirfit.shop.models.Product;
 import com.mirfit.shop.rowmappers.ProductRowMapper;
@@ -9,24 +9,20 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ShopRepositoryImpl implements ShopRepository {
-
+public class ProductRepositoryImpl implements ProductRepository {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ShopRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public ProductRepositoryImpl(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Product> getProducts() {
         try {
-            List<Product> products = jdbcTemplate.query(
-                    "SELECT * FROM products",
+            return jdbcTemplate.query(
+                    "SELECT * FROM product",
                     new ProductRowMapper());
-
-            return products;
-
         } catch (Exception ex) {
             return null;
         }

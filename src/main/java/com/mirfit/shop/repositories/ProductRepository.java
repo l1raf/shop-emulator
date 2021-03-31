@@ -1,11 +1,9 @@
-package com.mirfit.shop.repository;
+package com.mirfit.shop.repositories;
 
 import com.mirfit.shop.models.Product;
 
 import java.util.List;
 
-public interface ShopRepository {
-
+public interface ProductRepository {
     List<Product> getProducts();
-
 }
