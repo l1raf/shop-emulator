@@ -13,7 +13,7 @@ public class ProductRowMapper implements RowMapper<Product> {
         return new Product(
                 resultSet.getInt("id"),
                 resultSet.getString("name"),
-                Math.round(resultSet.getDouble("price")),
+                resultSet.getInt("price"),
                 resultSet.getString("currency_code"));
     }
 }

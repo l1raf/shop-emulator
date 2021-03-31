@@ -18,14 +18,14 @@ public class Product {
 
     private String name;
 
-    private long price;
+    private int price;
 
     private String currencyCode;
 
     public Product() {
     }
 
-    public Product(int id, String name, long price, String currencyCode) {
+    public Product(int id, String name, int price, String currencyCode) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -40,7 +40,7 @@ public class Product {
         return name;
     }
 
-    public long getPrice() {
+    public int getPrice() {
         return price;
     }
 

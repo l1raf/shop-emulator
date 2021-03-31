@@ -36,16 +36,30 @@ public class ShopServiceImpl implements ShopService {
                     LocalDate.now(),
                     LocalTime.now(),
                     random.nextBoolean(),
-                    getRandomCard().getNumber()
-            );
+                    getRandomCard().getNumber(),
+                    generateCardAcceptorIdentificationCode());
         }
 
         return request;
     }
 
     private Card getRandomCard() {
+
         List<Card> cards = cardRepository.getCards();
+        if (cards == null) {
+            return null;
+        }
         return cards.get(random.nextInt(cards.size()));
+    }
+
+    private String generateCardAcceptorIdentificationCode() {
+        int num = random.nextInt(15) + 1;
+        String code = "";
+
+        for (int i = 0; i < num; i++) {
+            code += random.nextInt(10);
+        }
+        return code;
     }
 
     public List<Product> generateProducts() {
@@ -56,7 +70,7 @@ public class ShopServiceImpl implements ShopService {
 
         List<Product> randomProducts = new ArrayList<>();
 
-        int numOfProducts = random.nextInt(products.size()) + 1; // 1 - 20
+        int numOfProducts = random.nextInt(products.size()) + 1;
 
         for (int i = 0; i < random.nextInt(products.size()) + 1; i++) {
             randomProducts.add(products.get(random.nextInt(numOfProducts)));
@@ -75,13 +89,12 @@ public class ShopServiceImpl implements ShopService {
         return sb.toString();
     }
 
-    private double countAmount(List<Product> products) {
-        double amount = 0.0;
+    private int countAmount(List<Product> products) {
+        int amount = 0;
 
         for (Product product : products) {
             amount += product.getPrice();
         }
-
         return amount;
     }
 }
