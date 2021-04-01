@@ -111,7 +111,21 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public String cancelTransaction(String transactionNumber) {
-        return null;
+        try {
+            Request request = new Request.Builder()
+                    .url(BASE_URL + "/cancel/" + transactionNumber)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            if (response.isSuccessful()) {
+                return "Successfully cancelled";
+            } else {
+                return "Failed to cancel";
+            }
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     private String generateTransactionId() {

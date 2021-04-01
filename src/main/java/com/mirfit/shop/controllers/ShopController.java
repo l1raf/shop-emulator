@@ -35,6 +35,6 @@ public class ShopController {
 
     @GetMapping("cancel")
     public ResponseEntity<String> cancel(String transactionNumber) {
-        return null;
+        return new ResponseEntity<>(shopService.cancelTransaction(transactionNumber), HttpStatus.OK);
     }
 }
