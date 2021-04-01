@@ -32,4 +32,9 @@ public class ShopController {
     public ResponseEntity<List<Product>> getRandomProducts() {
         return new ResponseEntity<>(shopService.generateProducts(), HttpStatus.OK);
     }
+
+    @GetMapping("cancel")
+    public ResponseEntity<String> cancel(String transactionNumber) {
+        return null;
+    }
 }

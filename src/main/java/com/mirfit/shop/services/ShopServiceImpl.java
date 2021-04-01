@@ -109,6 +109,11 @@ public class ShopServiceImpl implements ShopService {
         return randomProducts;
     }
 
+    @Override
+    public String cancelTransaction(String transactionNumber) {
+        return null;
+    }
+
     private String generateTransactionId() {
         StringBuilder sb = new StringBuilder();
 

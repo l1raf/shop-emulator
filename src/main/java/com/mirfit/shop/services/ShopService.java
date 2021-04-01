@@ -10,4 +10,6 @@ public interface ShopService {
     String sendCheck();
 
     List<Product> generateProducts();
+
+    String cancelTransaction(String transactionNumber);
 }
