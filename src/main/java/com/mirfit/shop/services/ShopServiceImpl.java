@@ -1,10 +1,13 @@
 package com.mirfit.shop.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.mirfit.shop.models.Card;
 import com.mirfit.shop.models.ReceiptRequest;
 import com.mirfit.shop.models.Product;
 import com.mirfit.shop.repositories.CardRepository;
 import com.mirfit.shop.repositories.ProductRepository;
+import okhttp3.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,13 +21,17 @@ public class ShopServiceImpl implements ShopService {
     private static final Random random = new Random();
     private final ProductRepository shopRepository;
     private final CardRepository cardRepository;
+    private static ObjectMapper mapper = new ObjectMapper();
+    private final String BASE_URL = "http://localhost:8080/bonuses";
+    private static final OkHttpClient client = new OkHttpClient();
+    private static final MediaType JSON = MediaType.get("application/json; charset=utf-8");
 
     public ShopServiceImpl(ProductRepository shopRepository, CardRepository cardRepository) {
         this.shopRepository = shopRepository;
         this.cardRepository = cardRepository;
     }
 
-    public ReceiptRequest sendCheck() {
+    public double sendCheck() {
         List<Product> products = generateProducts();
         ReceiptRequest request = new ReceiptRequest();
 
@@ -40,7 +47,32 @@ public class ShopServiceImpl implements ShopService {
                     generateCardAcceptorIdentificationCode());
         }
 
-        return request;
+        return sendRequest(request);
+    }
+
+    private double sendRequest(ReceiptRequest receiptRequest) {
+        try {
+            mapper.registerModule(new JavaTimeModule());
+            String json = mapper.writeValueAsString(receiptRequest);
+
+            RequestBody body = RequestBody.create(JSON, json);
+            Request request = new Request.Builder()
+                    .url(BASE_URL)
+                    .post(body)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            double result = -1;
+
+            if (response.isSuccessful()) {
+               result = Double.parseDouble(response.body().string());
+            }
+            return result;
+        }
+        catch (Exception ignored) {
+            return -1;
+        }
+
     }
 
     private Card getRandomCard() {
