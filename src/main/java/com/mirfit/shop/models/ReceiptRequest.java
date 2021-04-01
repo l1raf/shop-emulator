@@ -10,7 +10,7 @@ public class ReceiptRequest {
 
     private String transactionId;
 
-    private int amount;
+    private long amount;
 
     private List<Product> goods;
 
@@ -28,7 +28,7 @@ public class ReceiptRequest {
     public ReceiptRequest() {
     }
 
-    public ReceiptRequest(String transactionId, int amount,
+    public ReceiptRequest(String transactionId, long amount,
                           List<Product> goods, LocalDate dateTime,
                           LocalTime localTime, Boolean isAccrual, String cardSequence,
                           String cardAcceptorIdentificationCode) {
@@ -46,7 +46,7 @@ public class ReceiptRequest {
         return transactionId;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 

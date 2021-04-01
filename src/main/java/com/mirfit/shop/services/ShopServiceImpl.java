@@ -31,7 +31,7 @@ public class ShopServiceImpl implements ShopService {
         this.cardRepository = cardRepository;
     }
 
-    public double sendCheck() {
+    public String sendCheck() {
         List<Product> products = generateProducts();
         ReceiptRequest request = new ReceiptRequest();
 
@@ -50,7 +50,7 @@ public class ShopServiceImpl implements ShopService {
         return sendRequest(request);
     }
 
-    private double sendRequest(ReceiptRequest receiptRequest) {
+    private String sendRequest(ReceiptRequest receiptRequest) {
         try {
             mapper.registerModule(new JavaTimeModule());
             String json = mapper.writeValueAsString(receiptRequest);
@@ -62,15 +62,15 @@ public class ShopServiceImpl implements ShopService {
                     .build();
 
             Response response = client.newCall(request).execute();
-            double result = -1;
+            String result = null;
 
             if (response.isSuccessful()) {
-               result = Double.parseDouble(response.body().string());
+               result = response.body().string();
             }
             return result;
         }
-        catch (Exception ignored) {
-            return -1;
+        catch (Exception e) {
+            return e.getMessage();
         }
 
     }
@@ -119,8 +119,8 @@ public class ShopServiceImpl implements ShopService {
         return sb.toString();
     }
 
-    private int countAmount(List<Product> products) {
-        int amount = 0;
+    private long countAmount(List<Product> products) {
+        long amount = 0;
 
         for (Product product : products) {
             amount += product.getPrice();

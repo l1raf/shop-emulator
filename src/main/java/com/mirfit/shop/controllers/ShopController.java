@@ -24,7 +24,7 @@ public class ShopController {
     }
 
     @GetMapping("check")
-    public ResponseEntity<Double> getCheck() {
+    public ResponseEntity<String> getCheck() {
         return new ResponseEntity<>(shopService.sendCheck(), HttpStatus.OK);
     }
 
