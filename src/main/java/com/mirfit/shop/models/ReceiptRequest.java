@@ -1,14 +1,12 @@
 package com.mirfit.shop.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 public class ReceiptRequest {
 
-    private String transactionId;
+    private String transactionNumber;
 
     private long amount;
 
@@ -18,7 +16,7 @@ public class ReceiptRequest {
 
     private LocalTime localTime;
 
-    private Boolean isAccrual;
+    private Boolean accrual;
 
     private String cardSequence;
 
@@ -32,18 +30,18 @@ public class ReceiptRequest {
                           List<Product> goods, LocalDate dateTime,
                           LocalTime localTime, Boolean isAccrual, String cardSequence,
                           String cardAcceptorIdentificationCode) {
-        this.transactionId = transactionId;
+        this.transactionNumber = transactionId;
         this.amount = amount;
         this.goods = goods;
         this.localDate = dateTime;
-        this.isAccrual = isAccrual;
+        this.accrual = isAccrual;
         this.localTime = localTime;
         this.cardSequence = cardSequence;
         this.cardAcceptorIdentificationCode = cardAcceptorIdentificationCode;
     }
 
-    public String getTransactionId() {
-        return transactionId;
+    public String getTransactionNumber() {
+        return transactionNumber;
     }
 
     public long getAmount() {
@@ -59,7 +57,7 @@ public class ReceiptRequest {
     }
 
     public Boolean getAccrual() {
-        return isAccrual;
+        return accrual;
     }
 
     public String getCardSequence() {
